@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //Elaborar el código de la multiplicación de una matriz bidimensional, 
+        //utilizar funciones para realizar la operación multiplicación. Asimismo, 
+        //el resultado ordenar de manera descendente. Finalmente, realizar una función de búsqueda 
+        //para revisar si la matriz resultado tiene el valor 9, en caso fuese afirmativo, 
+        //indicar por pantalla " La matriz tiene el valor 9 y se encuentra en la posición i (fila) y 
+        //#j (columna).
+        function row_multiplicacion(matrix){
+            let results = [];
+            let mult = 1;
+
+            for (let i = 0; i < matrix.length; i++){
+                for (let j = 0; j < matrix[0].length; j++){
+                    mult *= matrix[i][j];
+                }
+                results.push(mult);
+                mult = 1;
+            }
+
+            return results;
+        }
+
+        function search_matrix(matriz) {
+            let encontrado = false;
+            let row;
+            let column;
+
+            for (let i = 0; i < matriz.length; i++){
+                for (let j = 0; j < matriz[0].length; j++){
+                    if (matriz[i][j] == 9){
+                        row = i;
+                        column = j;
+                        encontrado = true;
+                    }
+                }
+            }
+
+            if (encontrado)
+                console.log(`El numero 9 fue encontrado y se encuentra en la posicion ${row},${column}`);
+            else console.log("El numero 9 no fue encontrado")
+        }
+        //Método burbuja
+        function sort_results(results){
+            let aux
+            for (let i = 0; i < results.length; i++){
+                for (let j = 0; j <results.length; j++){
+                    if(results[j] < results [j+1]){
+                        aux = results[j];
+                        results[j] = results[j+1];
+                        results[j+1] = aux;
+                    }
+                }
+            }
+            return results;
+        }
+
+        /////////////////////////////////////////////////////////////
+
+        let columnas = 3;
+        let filas = 4;
+
+        let matriz = [[],[],[]];
+
+        let valor;
+        for(let i = 0; i < columnas; i++){
+            for(let j = 0; j < filas; j++){
+                valor = parseInt(prompt(`Ingrese valor en la columna ${i} y fila ${j}`));
+                matriz[i].push(valor)
+
+            }
+        }
+
+        console.log(matriz);
+        let results = row_multiplicacion(matriz);
+        results = sort_results(results);
+        console.log(results);
+
+        search_matrix(matriz);
+
+
+    </script>
+</body>
+</html>
